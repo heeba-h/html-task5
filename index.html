@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Registration Form</title>
+</head>
+<body>
+
+    <h2>Register</h2>
+
+    <form>
+        <!-- First Name -->
+        <label for="firstName">First Name:</label><br>
+        <input type="text" id="firstName" name="firstName" required><br><br>
+
+        <!-- Last Name -->
+        <label for="lastName">Last Name:</label><br>
+        <input type="text" id="lastName" name="lastName" required><br><br>
+
+        <!-- Email Address -->
+        <label for="email">Email Address:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <!-- Password -->
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required onkeyup="checkPasswordStrength();"><br>
+        <span id="strengthMessage"></span><br><br>
+
+        <!-- Confirm Password -->
+        <label for="confirmPassword">Confirm Password:</label><br>
+        <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+        <span id="confirmMessage"></span><br><br>
+
+        <!-- Date of Birth -->
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" id="dob" name="dob" required><br><br>
+
+        <!-- Gender -->
+        <label for="gender">Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br>
+        <input type="radio" id="other" name="gender" value="other">
+        <label for="other">Other</label><br><br>
+
+        <!-- Country -->
+        <label for="country">Country:</label><br>
+        <select id="country" name="country" required>
+            <option value="india">India</option>
+            <option value="usa">USA</option>
+            <option value="canada">Canada</option>
+            <option value="australia">Australia</option>
+            <option value="other">Other</option>
+        </select><br><br>
+
+        <!-- Agree to Terms -->
+        <input type="checkbox" id="terms" name="terms" required>
+        <label for="terms">I agree to the terms and conditions</label><br><br>
+
+        <!-- Submit Button -->
+        <input type="submit" value="Register" id="submitBtn">
+
+    </form>
+
+    <script>
+        function checkPasswordStrength() {
+            const password = document.getElementById("password").value;
+            const strengthMessage = document.getElementById("strengthMessage");
+            
+            if (password.length < 6) {
+                strengthMessage.textContent = "Weak";
+                strengthMessage.style.color = "red";
+            } else if (password.length < 10) {
+                strengthMessage.textContent = "Medium";
+                strengthMessage.style.color = "orange";
+            } else {
+                strengthMessage.textContent = "Strong";
+                strengthMessage.style.color = "green";
+            }
+
+            validateConfirmPassword(); // Check if confirm password matches
+        }
+
+        function validateConfirmPassword() {
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const confirmMessage = document.getElementById("confirmMessage");
+
+            if (password !== confirmPassword) {
+                confirmMessage.textContent = "Passwords do not match";
+                confirmMessage.style.color = "red";
+                return false;
+            } else {
+                confirmMessage.textContent = "Passwords match";
+                confirmMessage.style.color = "green";
+                return true;
+            }
+        }
+
+        function validateForm() {
+            return validateConfirmPassword(); // Ensure the form only submits if passwords match
+        }
+    </script>
+
+</body>
+</html>
